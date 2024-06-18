@@ -1,0 +1,17 @@
+/* src/components/Error.css */
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 1.2em;
+    color: #ff0000;
+    animation: pulse 2s ease-in-out infinite;
+}
