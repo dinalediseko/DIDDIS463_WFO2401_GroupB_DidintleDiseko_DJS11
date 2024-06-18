@@ -1,5 +1,5 @@
 // src/services/api.js
-const API_URL = 'https://podcast-api.netlify.app/'; // Replace with your actual API URL
+const API_URL = 'https://podcast-api.netlify.app'; // Replace with your actual API URL
 
 export const fetchShows = async () => {
     try {
@@ -14,5 +14,3 @@ export const fetchShows = async () => {
         throw error;
     }
 };
-
-// You can add more functions here for fetching seasons, episodes, etc. as needed

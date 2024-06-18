@@ -1,15 +1,15 @@
 // src/components/SeasonList.js
 import React from 'react';
+import './SeasonList.css'; // Import the CSS for styling
 
 const SeasonList = ({ seasons, onSeasonSelect }) => {
     return (
         <div className="season-list">
-            <h2>Seasons</h2>
             {seasons.map(season => (
-                <div key={season.id} onClick={() => onSeasonSelect(season.id)}>
-                    <h3>{season.title}</h3>
+                <div key={season.id} className="season-card" onClick={() => onSeasonSelect(season)}>
+                    <img src={season.image} alt={season.title} className="season-image" />
+                    <h4>{season.title}</h4>
                     <p>{season.description}</p>
-                    {/* Add more season details as needed */}
                 </div>
             ))}
         </div>
@@ -17,3 +17,4 @@ const SeasonList = ({ seasons, onSeasonSelect }) => {
 };
 
 export default SeasonList;
+

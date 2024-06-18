@@ -1,22 +1,24 @@
 // src/components/ShowDetail.js
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SeasonList from './SeasonList';
 import EpisodeList from './EpisodeList';
+import './ShowDetail.css'; // Import the CSS for styling
 
-const ShowDetail = ({ show }) => {
+const ShowDetail = ({ show, onBack }) => {
     const [selectedSeason, setSelectedSeason] = useState(null);
-
-    const handleSeasonSelect = (seasonId) => {
-        setSelectedSeason(seasonId);
-    };
 
     return (
         <div className="show-detail">
+            <button className="back-button" onClick={onBack}>Back to Shows</button>
+            <img src={show.image} alt={show.title} className="show-detail-image" />
             <h2>{show.title}</h2>
             <p>{show.description}</p>
-            <SeasonList seasons={show.seasons} onSeasonSelect={handleSeasonSelect} />
+            <SeasonList seasons={show.seasons} onSeasonSelect={setSelectedSeason} />
             {selectedSeason && (
-                <EpisodeList episodes={show.seasons.find(season => season.id === selectedSeason).episodes} />
+                <div>
+                    <h3>Episodes for {selectedSeason.title}</h3>
+                    <EpisodeList episodes={selectedSeason.episodes} />
+                </div>
             )}
         </div>
     );

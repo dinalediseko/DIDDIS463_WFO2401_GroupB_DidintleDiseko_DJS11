@@ -1,0 +1,40 @@
+/* src/components/ShowList.css */
+
+.show-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.show-card {
+    background-color: #222;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 200px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.show-card:hover {
+    transform: scale(1.05);
+}
+
+.show-image {
+    width: 100%;
+    height: auto;
+}
+
+.show-info {
+    padding: 10px;
+}
+
+.show-info h3 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.show-info p {
+    font-size: 0.9em;
+    color: #b3b3b3;
+}
