@@ -1,0 +1,64 @@
+body {
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.App {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.App-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.App-main {
+  margin-top: 20px;
+}
+
+body.dark {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+body.light {
+  background-color: #ffffff;
+  color: #333333;
+}
+
+.App-header.dark {
+  background-color: #222222;
+}
+
+.App-header.light {
+  background-color: #f0f0f0;
+}
+
+.theme-toggle-button {
+  background-color: transparent;
+  border: 1px solid;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+}
+
+.filters select {
+  margin-left: 10px;
+  padding: 5px;
+}
+
+.sort {
+  margin-top: 10px;
+}
+
+.sort select {
+  padding: 5px;
+}
