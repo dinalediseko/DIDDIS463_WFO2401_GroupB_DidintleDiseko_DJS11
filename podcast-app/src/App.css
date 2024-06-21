@@ -14,6 +14,12 @@ body {
   justify-content: space-between;
   align-items: center;
   transition: background-color 0.3s ease;
+  padding-bottom: 10px; /* Added for slight spacing adjustment */
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
 }
 
 .App-main {
@@ -41,18 +47,19 @@ body.light {
 .theme-toggle-button {
   background-color: transparent;
   border: 1px solid;
-  padding: 5px 10px;
+  padding: 8px 12px; /* Increased padding for better touch target */
   cursor: pointer;
 }
 
 .filters {
   display: flex;
   align-items: center;
+  margin-left: auto; /* Align filters to the right */
 }
 
 .filters select {
   margin-left: 10px;
-  padding: 5px;
+  padding: 8px; /* Increased padding for better touch target */
 }
 
 .sort {
@@ -60,5 +67,61 @@ body.light {
 }
 
 .sort select {
-  padding: 5px;
+  padding: 8px; /* Increased padding for better touch target */
+}
+
+.back-button {
+  margin-right: 10px;
+  background-color: #be001c;
+  color: #efefe9;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #680010;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .App-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .header-left,
+  .header-right {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .filters,
+  .sort {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+  }
+
+  .filters select,
+  .sort select {
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  .theme-toggle-button {
+    margin: 10px 0;
+    width: 100%;
+  }
 }

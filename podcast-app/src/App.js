@@ -3,11 +3,12 @@ import './App.css';
 import ShowList from './components/ShowList';
 import ShowDetail from './components/ShowDetail';
 import Loading from './components/Loading';
-import Error from './components/Error';
+import Error from './components/Error'; // Ensure Error component is imported
 import SearchBar from './components/SearchBar';
 import FilterDropdown from './components/FilterDropdown';
 import ThemeToggle from './components/ThemeToggle';
 import Favorites from './components/Favorites';
+import ScrollUpButton from './components/ScrollUpButton';
 import { fetchShows, genreTitles } from './services/api';
 
 const App = () => {
@@ -77,19 +78,32 @@ const App = () => {
         filterAndSortShows();
     }, [filterAndSortShows]);
 
-    const handleSearch = query => {
+    const handleSearch = async (query) => {
         setSearchQuery(query);
+        try {
+            // Simulating API call or data processing
+            const filtered = shows.filter(show =>
+                show.title.toLowerCase().includes(query.toLowerCase())
+            );
+            setFilteredShows(filtered);
+            if (filtered.length === 0) {
+                throw new Error('Show not found.');
+            }
+        } catch (error) {
+            throw error;
+        }
     };
 
     const handleClearSearch = () => {
         setSearchQuery('');
+        setError(null); // Clear error message on clear search
     };
 
-    const handleFilterByGenre = genreId => {
+    const handleFilterByGenre = (genreId) => {
         setFilterCriteria(genreId);
     };
 
-    const handleSortChange = e => {
+    const handleSortChange = (e) => {
         setSortCriteria(e.target.value);
     };
 
@@ -104,6 +118,10 @@ const App = () => {
         setFavoriteEpisodes(updatedFavorites);
     };
 
+    const handleBackClick = () => {
+        setSelectedShow(null);
+    };
+
     const appClass = theme === 'dark' ? 'App dark' : 'App light';
     const headerClass = theme === 'dark' ? 'App-header dark' : 'App-header light';
 
@@ -113,27 +131,40 @@ const App = () => {
     return (
         <div className={appClass}>
             <header className={headerClass}>
-                <h1>Podcast App</h1>
-                <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-                <SearchBar onSearch={handleSearch} onClearSearch={handleClearSearch} />
-                <FilterDropdown
-                    genreTitles={genreTitles}
-                    selectedGenre={filterCriteria}
-                    onSelectGenre={handleFilterByGenre}
-                />
-                <div className="sort">
-                    <h3>Sort by:</h3>
-                    <select value={sortCriteria} onChange={handleSortChange}>
-                        <option value="A-Z">Title: A-Z</option>
-                        <option value="Z-A">Title: Z-A</option>
-                        <option value="Newest">Most Recently Updated</option>
-                        <option value="Oldest">Least Recently Updated</option>
-                    </select>
+                <div className="header-left">
+                    {selectedShow && (
+                        <button className="back-button" onClick={handleBackClick}>
+                            Back
+                        </button>
+                    )}
+                    <h1>Podcast App</h1>
                 </div>
-                <Favorites
-                    favoriteEpisodes={favoriteEpisodes}
-                    removeFromFavorites={removeFromFavorites}
-                />
+                <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+                <div className="header-content">
+                    <div className="header-left">
+                        <FilterDropdown
+                            genreTitles={genreTitles}
+                            selectedGenre={filterCriteria}
+                            onSelectGenre={handleFilterByGenre}
+                        />
+                        <div className="sort">
+                            <h3>Sort by:</h3>
+                            <select value={sortCriteria} onChange={handleSortChange}>
+                                <option value="A-Z">Title: A-Z</option>
+                                <option value="Z-A">Title: Z-A</option>
+                                <option value="Newest">Most Recently Updated</option>
+                                <option value="Oldest">Least Recently Updated</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className="header-right">
+                        <Favorites
+                            favoriteEpisodes={favoriteEpisodes}
+                            removeFromFavorites={removeFromFavorites}
+                        />
+                        <SearchBar onSearch={handleSearch} onClearSearch={handleClearSearch} />
+                    </div>
+                </div>
             </header>
             <main className="App-main">
                 {selectedShow ? (
@@ -142,8 +173,10 @@ const App = () => {
                     <ShowList shows={filteredShows.length > 0 ? filteredShows : shows} onSelectShow={setSelectedShow} />
                 )}
             </main>
+            <ScrollUpButton />
         </div>
     );
 };
 
 export default App;
+
