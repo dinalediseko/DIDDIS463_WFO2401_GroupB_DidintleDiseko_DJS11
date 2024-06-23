@@ -1,5 +1,3 @@
-// src/services/api.js
-
 const genreTitles = {
     1: "Personal Growth",
     2: "Investigative Journalism",
@@ -28,12 +26,12 @@ export const fetchShows = async () => {
 
 export const fetchSeasons = async (showId) => {
     try {
-        const response = await fetch(`https://podcast-api.netlify.app/shows/${showId}/seasons`);
+        const response = await fetch(`https://podcast-api.netlify.app/id/${showId}`);
         if (!response.ok) {
-            throw new Error('Failed to fetch seasons');
+            throw new Error('Failed to fetch show data');
         }
         const data = await response.json();
-        return data;
+        return data.seasons; // Assuming 'seasons' is an array of season objects in the show data
     } catch (error) {
         console.error(`Error fetching seasons for show ${showId}:`, error);
         throw error;
@@ -54,4 +52,4 @@ export const fetchEpisodes = async (seasonId) => {
     }
 };
 
-export { genreTitles }; // Exporting genreTitles for use in other parts of the application
+export { genreTitles };

@@ -1,3 +1,5 @@
+// src/App.js
+
 import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import ShowList from './components/ShowList';
@@ -168,7 +170,9 @@ const App = () => {
             </header>
             <main className="App-main">
                 {selectedShow ? (
-                    <ShowDetail show={selectedShow} />
+                    <>
+                        <ShowDetail show={selectedShow} />
+                    </>
                 ) : (
                     <ShowList shows={filteredShows.length > 0 ? filteredShows : shows} onSelectShow={setSelectedShow} />
                 )}
@@ -179,4 +183,3 @@ const App = () => {
 };
 
 export default App;
-

@@ -1,0 +1,117 @@
+/* src/components/ShowDetail.css */
+
+.show-detail {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.show-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.show-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+.show-info {
+    flex: 1;
+}
+
+.show-info h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.show-info p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+}
+
+.seasons {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.season-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.season-card:hover {
+    transform: translateY(-5px);
+}
+
+.season-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.season-details {
+    padding: 10px;
+}
+
+.season-details h4 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.season-details p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.selected-season {
+    margin-top: 30px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.selected-season h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .show-detail {
+        padding: 15px;
+    }
+
+    .show-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .show-image {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    .seasons {
+        grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    }
+}
