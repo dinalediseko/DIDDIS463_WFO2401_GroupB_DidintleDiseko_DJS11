@@ -5,13 +5,14 @@ import './App.css';
 import ShowList from './components/ShowList';
 import ShowDetail from './components/ShowDetail';
 import Loading from './components/Loading';
-import Error from './components/Error'; // Ensure Error component is imported
+import Error from './components/Error';
 import SearchBar from './components/SearchBar';
 import FilterDropdown from './components/FilterDropdown';
 import ThemeToggle from './components/ThemeToggle';
 import Favorites from './components/Favorites';
 import ScrollUpButton from './components/ScrollUpButton';
-import { fetchShows, genreTitles } from './services/api';
+import MediaPlayer from './components/MediaPlayer';
+import { fetchShows, fetchSeasons, fetchEpisodes, genreTitles } from './services/api';
 
 const App = () => {
     const [shows, setShows] = useState([]);
@@ -23,13 +24,15 @@ const App = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [filterCriteria, setFilterCriteria] = useState(null);
     const [favoriteEpisodes, setFavoriteEpisodes] = useState([]);
-    const [sortCriteria, setSortCriteria] = useState('A-Z'); // Default sort criteria
+    const [sortCriteria, setSortCriteria] = useState('A-Z');
+    const [seasons, setSeasons] = useState([]);
+    const [currentEpisode, setCurrentEpisode] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const data = await fetchShows();
-                console.log('Shows data:', data); // Debug log
+                console.log('Shows data:', data);
                 setShows(data);
                 setLoading(false);
             } catch (error) {
@@ -43,26 +46,39 @@ const App = () => {
 
     useEffect(() => {
         document.body.className = theme;
+
+        // Retrieve the last played episode and progress
+        const savedEpisode = JSON.parse(localStorage.getItem('currentEpisode'));
+        const savedProgress = localStorage.getItem('currentEpisodeProgress');
+
+        if (savedEpisode) {
+            setCurrentEpisode(savedEpisode);
+        }
+
+        // Update the audio player to start from the saved progress
+        if (savedProgress) {
+            const audio = document.querySelector('audio');
+            if (audio) {
+                audio.currentTime = savedProgress;
+            }
+        }
     }, [theme]);
 
     const filterAndSortShows = useCallback(() => {
         let filtered = shows;
 
-        // Filter by search query
         if (searchQuery.trim() !== '') {
             filtered = filtered.filter(show =>
                 show.title.toLowerCase().includes(searchQuery.toLowerCase())
             );
         }
 
-        // Filter by genre criteria
         if (filterCriteria !== null) {
             filtered = filtered.filter(show =>
                 show.genres && show.genres.includes(filterCriteria)
             );
         }
 
-        // Sort by criteria
         if (sortCriteria === 'A-Z') {
             filtered.sort((a, b) => a.title.localeCompare(b.title));
         } else if (sortCriteria === 'Z-A') {
@@ -83,7 +99,6 @@ const App = () => {
     const handleSearch = async (query) => {
         setSearchQuery(query);
         try {
-            // Simulating API call or data processing
             const filtered = shows.filter(show =>
                 show.title.toLowerCase().includes(query.toLowerCase())
             );
@@ -98,7 +113,7 @@ const App = () => {
 
     const handleClearSearch = () => {
         setSearchQuery('');
-        setError(null); // Clear error message on clear search
+        setError(null);
     };
 
     const handleFilterByGenre = (genreId) => {
@@ -122,6 +137,31 @@ const App = () => {
 
     const handleBackClick = () => {
         setSelectedShow(null);
+    };
+
+    const handleShowSelect = async (show) => {
+        setSelectedShow(show);
+        try {
+            const seasonsData = await fetchSeasons(show.id);
+            setSeasons(seasonsData);
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
+    const handleEpisodePlay = (episode) => {
+        setCurrentEpisode(episode);
+        localStorage.setItem('currentEpisode', JSON.stringify(episode));
+    };
+
+    const handlePause = () => {
+        setCurrentEpisode(null);
+        localStorage.removeItem('currentEpisode');
+        localStorage.removeItem('currentEpisodeProgress');
+    };
+
+    const handleTimeUpdate = (e) => {
+        localStorage.setItem('currentEpisodeProgress', e.target.currentTime);
     };
 
     const appClass = theme === 'dark' ? 'App dark' : 'App light';
@@ -170,14 +210,13 @@ const App = () => {
             </header>
             <main className="App-main">
                 {selectedShow ? (
-                    <>
-                        <ShowDetail show={selectedShow} />
-                    </>
+                    <ShowDetail show={selectedShow} seasons={seasons} onEpisodePlay={handleEpisodePlay} />
                 ) : (
-                    <ShowList shows={filteredShows.length > 0 ? filteredShows : shows} onSelectShow={setSelectedShow} />
+                    <ShowList shows={filteredShows.length > 0 ? filteredShows : shows} onSelectShow={handleShowSelect} />
                 )}
             </main>
             <ScrollUpButton />
+            <MediaPlayer episode={currentEpisode} onPause={handlePause} onTimeUpdate={handleTimeUpdate} />
         </div>
     );
 };
