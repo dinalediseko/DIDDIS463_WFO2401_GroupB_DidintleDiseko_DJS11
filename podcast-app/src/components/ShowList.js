@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import './ShowList.css'; // Import corresponding CSS file for styling
-import { genreTitles } from '../services/api';
+import { genreTitles } from '../services/api'; // Import genreTitles from API
 
 const ShowList = ({ shows, onSelectShow }) => {
-    const [hoveredShow, setHoveredShow] = useState(null);
+    const [hoveredShow, setHoveredShow] = useState(null); // State: Track hovered show for displaying description
 
+    // Handler for mouse enter event to show description
     const handleMouseEnter = (show) => {
         setHoveredShow(show);
     };
 
+    // Handler for mouse leave event to hide description
     const handleMouseLeave = () => {
         setHoveredShow(null);
     };
@@ -46,3 +48,5 @@ const ShowList = ({ shows, onSelectShow }) => {
 };
 
 export default ShowList;
+
+

@@ -112,4 +112,26 @@
     margin-top: 10px;
 }
 
+/* ShowDetail.css */
 
+/* Favorite button */
+.favorite-button {
+    background-color: transparent;
+    border: none;
+    color: #1db954; /* Spotify green */
+    font-size: 1rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+}
+
+.favorite-button:hover {
+    color: #1ed760; /* Slightly lighter shade of green on hover */
+}
+
+.favorite-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    fill: currentColor; /* Ensures icon color matches text color */
+}

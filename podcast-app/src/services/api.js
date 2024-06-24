@@ -1,3 +1,4 @@
+// Define genreTitles object mapping genre IDs to genre names
 const genreTitles = {
     1: "Personal Growth",
     2: "Investigative Journalism",
@@ -10,6 +11,7 @@ const genreTitles = {
     9: "Kids and Family"
 };
 
+// Function to fetch list of shows
 export const fetchShows = async () => {
     try {
         const response = await fetch('https://podcast-api.netlify.app/shows');
@@ -17,13 +19,14 @@ export const fetchShows = async () => {
             throw new Error('Failed to fetch shows');
         }
         const data = await response.json();
-        return data;
+        return data; // Return JSON data received from the API
     } catch (error) {
         console.error('Error fetching shows:', error);
-        throw error;
+        throw error; // Throw error if fetch operation fails
     }
 };
 
+// Function to fetch seasons for a specific show
 export const fetchSeasons = async (showId) => {
     try {
         const response = await fetch(`https://podcast-api.netlify.app/id/${showId}`);
@@ -31,13 +34,14 @@ export const fetchSeasons = async (showId) => {
             throw new Error('Failed to fetch show data');
         }
         const data = await response.json();
-        return data.seasons; // Assuming 'seasons' is an array of season objects in the show data
+        return data.seasons; // Return seasons array from the show data
     } catch (error) {
         console.error(`Error fetching seasons for show ${showId}:`, error);
-        throw error;
+        throw error; // Throw error if fetch operation fails
     }
 };
 
+// Function to fetch episodes for a specific season
 export const fetchEpisodes = async (seasonId) => {
     try {
         const response = await fetch(`https://podcast-api.netlify.app/seasons/${seasonId}/episodes`);
@@ -45,11 +49,12 @@ export const fetchEpisodes = async (seasonId) => {
             throw new Error('Failed to fetch episodes');
         }
         const data = await response.json();
-        return data;
+        return data; // Return episodes data received from the API
     } catch (error) {
         console.error(`Error fetching episodes for season ${seasonId}:`, error);
-        throw error;
+        throw error; // Throw error if fetch operation fails
     }
 };
 
+// Export the genreTitles object for external use
 export { genreTitles };

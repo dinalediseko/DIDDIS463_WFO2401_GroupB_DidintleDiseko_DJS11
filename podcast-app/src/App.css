@@ -22,6 +22,12 @@ body {
   align-items: center;
 }
 
+.logo {
+  height: 15%; /* Adjust the percentage to scale the logo */
+  max-width: 25%; /* Ensure the logo doesn't exceed its container's width */
+  object-fit: contain; /* Maintain aspect ratio and fit within the specified height */
+}
+
 .App-main {
   margin-top: 20px;
 }
