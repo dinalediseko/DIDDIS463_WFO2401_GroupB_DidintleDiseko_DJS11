@@ -20,7 +20,7 @@
     width: 15px; /* dot size */
     height: 15px;
     border-radius: 50%;
-    background-color: #be001c; /* Spotify green */
+    background-color: #be001c; 
     margin: 0 5px; /* space between dots */
     animation: loading-animation 1s infinite ease-in-out;
 }

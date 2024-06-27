@@ -34,13 +34,13 @@ const SearchBar = ({ onSearch, onClearSearch }) => {
                 placeholder="Search shows..."
                 className="search-input"
             />
-            <button type="submit" className="search-button">Search</button> {/* Button to submit search */}
+            <button type="submit" className="search-button">Search</button> 
             {query && (
                 <button type="button" className="clear-button" onClick={handleClear}>
                     Clear
                 </button>
             )}
-            {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Display error message if present */}
+            {errorMessage && <p className="error-message">{errorMessage}</p>} 
         </form>
     );
 };

@@ -8,9 +8,9 @@ const Loading = () => {
   return (
     <div className="loading-overlay">
       <div className="loading-container">
-        <div className="loading-dot"></div> {/* Individual loading dot */}
-        <div className="loading-dot"></div> {/* Individual loading dot */}
-        <div className="loading-dot"></div> {/* Individual loading dot */}
+        <div className="loading-dot"></div> 
+        <div className="loading-dot"></div> 
+        <div className="loading-dot"></div> 
       </div>
     </div>
   );

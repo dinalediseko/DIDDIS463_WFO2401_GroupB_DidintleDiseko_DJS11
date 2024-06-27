@@ -125,7 +125,7 @@ const ShowDetail = ({ show }) => {
                       {season.episodes.map((episode) => (
                         <li key={episode.id} className="episode-item">
                           <div className="episode-title">{episode.title}</div>{" "}
-                          /* Display episode title */
+                      
                           <div className="episode-actions">
                             <button
                               className="play-button"
@@ -153,9 +153,8 @@ const ShowDetail = ({ show }) => {
         favoriteEpisodes={favoriteEpisodes}
         removeFromFavorites={removeFromFavorites}
       />{" "}
-      /* Render Favorites component */
-      <MediaPlayer episode={currentEpisode} onPause={handleEpisodePause} /> /*
-      Render MediaPlayer component */
+   
+      <MediaPlayer episode={currentEpisode} onPause={handleEpisodePause} /> 
     </div>
   );
 };

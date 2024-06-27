@@ -31,9 +31,9 @@ const ScrollUpButton = () => {
     };
 
     return (
-        <div className={`scroll-up-button ${isVisible ? 'show' : 'hide'}`}> {/* Conditional class based on isVisible state */}
+        <div className={`scroll-up-button ${isVisible ? 'show' : 'hide'}`}> 
             <button onClick={scrollToTop} title="Scroll to top">
-                &#9650; {/* Unicode triangle character for visual representation */}
+                &#9650;
             </button>
         </div>
     );

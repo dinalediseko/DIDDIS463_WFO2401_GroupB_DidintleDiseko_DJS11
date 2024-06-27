@@ -31,23 +31,23 @@ const MediaPlayer = ({ episode, onPause }) => {
         <>
             <div className="media-player">
                 <div className="media-info">
-                    <h4>{episode.title}</h4> {/* Display title of the episode */}
+                    <h4>{episode.title}</h4> 
                 </div>
                 <div className="media-controls">
-                    <audio controls autoPlay> {/* Audio element for playing the episode */}
-                        <source src={episode.file} type="audio/mp3" /> {/* Source of the audio file */}
+                    <audio controls autoPlay> 
+                        <source src={episode.file} type="audio/mp3" /> 
                         Your browser does not support the audio element.
                     </audio>
-                    <button className="close-button" onClick={handleClose}>Close</button> /* Button to initiate closing, showing modal */
+                    <button className="close-button" onClick={handleClose}>Close</button> 
                 </div>
             </div>
-            {showConfirm && ( /* Conditional rendering of confirmation modal */
+            {showConfirm && (
                 <div className="modal">
                     <div className="modal-content">
                         <h3>Are you sure?</h3>
                         <p>You will lose your progress if you close this episode.</p>
-                        <button className="confirm-button" onClick={confirmClose}>Yes, close it</button> /* Button to confirm closing */
-                        <button className="cancel-button" onClick={cancelClose}>Cancel</button> /* Button to cancel closing */
+                        <button className="confirm-button" onClick={confirmClose}>Yes, close it</button> 
+                        <button className="cancel-button" onClick={cancelClose}>Cancel</button> 
                     </div>
                 </div>
             )}

@@ -14,7 +14,7 @@ body {
   justify-content: space-between;
   align-items: center;
   transition: background-color 0.3s ease;
-  padding-bottom: 10px; /* Added for slight spacing adjustment */
+  padding-bottom: 10px; 
 }
 
 .header-left {
